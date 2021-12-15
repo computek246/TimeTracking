@@ -16,34 +16,40 @@ namespace TimeTracking
 
             try
             {
-                await using var context = new TimeTrackingDbContext();
-                await context.Database.MigrateAsync();
                 var now = DateTime.Now;
 
                 var arg = Regex.Replace(string.Join(" ", args), @"\s+", " ");
 
                 Console.WriteLine($"{arg} at: {now:dd/MM/yyyy hh:mm:ss tt}");
 
+                var setting = new Setting();
+
                 if (!string.IsNullOrEmpty(arg))
                 {
-                    var log = new ActionsLog
-                    {
-                        ActionId = null,
-                        ActionName = arg,
-                        ActionDate = now
-                    };
+                    await using var context = new TimeTrackingDbContext();
 
-                    await context.SingleInsertAsync(log);
-                    await context.BulkSaveChangesAsync();
+                    await ResilientTransaction.New(context)
+                        .ExecuteAsync(async () =>
+                        {
+                            var log = new ActionsLog
+                            {
+                                ActionId = null,
+                                ActionName = arg,
+                                ActionDate = now
+                            };
+
+                            await context.SingleInsertAsync(log);
+                            await context.BulkSaveChangesAsync();
+                        });
+
+                    setting = await context.Settings.FirstOrDefaultAsync(x =>
+                        x.Name == SettingValues.GeneralSetting.LegalCopyright);
                 }
 
 
                 Console.BackgroundColor = ConsoleColor.DarkBlue;
                 Console.ForegroundColor = ConsoleColor.White;
 
-                var setting =
-                    await context.Settings.FirstOrDefaultAsync(x =>
-                        x.Name == SettingValues.GeneralSetting.LegalCopyright);
                 Console.WriteLine(setting?.Value);
             }
             catch (Exception exception)

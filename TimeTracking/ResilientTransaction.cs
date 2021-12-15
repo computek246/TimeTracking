@@ -18,6 +18,7 @@ namespace TimeTracking
             // Use of an EF Core resiliency strategy when using multiple DbContexts
             // within an explicit BeginTransaction():
             // https://docs.microsoft.com/ef/core/miscellaneous/connection-resiliency
+            
 
             var strategy = _context.Database.CreateExecutionStrategy();
             await strategy.ExecuteAsync(async () =>
