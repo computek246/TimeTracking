@@ -26,7 +26,6 @@ namespace TimeTracking
                         maxRetryCount: 10,
                         maxRetryDelay: TimeSpan.FromSeconds(30),
                         errorNumbersToAdd: null);
-                    
                 });
         }
 
