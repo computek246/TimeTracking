@@ -58,7 +58,7 @@ namespace TimeTracking.Migrations
             migrationBuilder.InsertData(
                 table: "Setting",
                 columns: new[] { "Id", "Name", "Value" },
-                values: new object[] { 1, "Setting.GeneralSetting.LegalCopyright", "LegalCopyright © 2021 Dell Inc. or its subsidiaries. All Rights Reserved." });
+                values: new object[] { 1, "Setting.GeneralSetting.LegalCopyright", "LegalCopyright © {0} Dell Inc. or its subsidiaries. All Rights Reserved." });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Setting_Name",

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TimeTracking.Context;
 
 namespace TimeTracking.Migrations
 {
     [DbContext(typeof(TimeTrackingDbContext))]
-    partial class TimeTrackingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220101152000_addProjectsTable")]
+    partial class addProjectsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,38 +63,6 @@ namespace TimeTracking.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Projects");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            IsActive = true,
-                            ProjectName = "Infinity"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            IsActive = true,
-                            ProjectName = "EVO"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            IsActive = true,
-                            ProjectName = "Emerald"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            IsActive = true,
-                            ProjectName = "SELECT.TSM"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            IsActive = true,
-                            ProjectName = "Other"
-                        });
                 });
 
             modelBuilder.Entity("TimeTracking.Entities.Setting", b =>
@@ -135,17 +105,28 @@ namespace TimeTracking.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<TimeSpan?>("BaseHour")
+                        .HasColumnType("time");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("date");
 
-                    b.Property<TimeSpan>("EndAt")
+                    b.Property<string>("DayName")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<TimeSpan?>("EndAt")
                         .HasColumnType("time");
 
-                    b.Property<TimeSpan>("StartAt")
+                    b.Property<TimeSpan?>("StartAt")
                         .HasColumnType("time");
 
-                    b.Property<int>("TotalMinute")
+                    b.Property<int?>("StatusId")
                         .HasColumnType("int");
+
+                    b.Property<TimeSpan?>("TotalHour")
+                        .HasColumnType("time");
 
                     b.HasKey("Id");
 

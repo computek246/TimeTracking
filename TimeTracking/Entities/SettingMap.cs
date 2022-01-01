@@ -1,25 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace TimeTracking
+namespace TimeTracking.Entities
 {
-    public class Setting
-    {
-        public Setting() { }
-
-        public Setting(string name, string value)
-        {
-            Name = name;
-            Value = value;
-        }
-
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Value { get; set; }
-    }
-
     public class SettingMap : IEntityTypeConfiguration<Setting>
     {
         public void Configure(EntityTypeBuilder<Setting> builder)
@@ -37,7 +21,7 @@ namespace TimeTracking
                 {
                     Id = 1,
                     Name = SettingValues.GeneralSetting.LegalCopyright,
-                    Value = $"Copyright © {DateTime.Now.Year} Dell Inc. or its subsidiaries. All Rights Reserved."
+                    Value = "Copyright © {0} Dell Inc. or its subsidiaries. All Rights Reserved."
                 }
             });
         }

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace TimeTracking
+namespace TimeTracking.Context
 {
     public class ResilientTransaction
     {

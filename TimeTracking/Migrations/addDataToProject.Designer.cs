@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TimeTracking;
+using TimeTracking.Context;
 
 namespace TimeTracking.Migrations
 {
     [DbContext(typeof(TimeTrackingDbContext))]
-    [Migration("20211212232637_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220101152643_addDataToProject")]
+    partial class addDataToProject
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace TimeTracking.Migrations
                 .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("TimeTracking.ActionsLog", b =>
+            modelBuilder.Entity("TimeTracking.Entities.ActionsLog", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -39,12 +39,65 @@ namespace TimeTracking.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int?>("ProjectId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("ActionsLogs");
                 });
 
-            modelBuilder.Entity("TimeTracking.Setting", b =>
+            modelBuilder.Entity("TimeTracking.Entities.Project", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ProjectName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Projects");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsActive = true,
+                            ProjectName = "Infinity"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsActive = true,
+                            ProjectName = "EVO"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsActive = true,
+                            ProjectName = "Emerald"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsActive = true,
+                            ProjectName = "SELECT.TSM"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsActive = true,
+                            ProjectName = "Other"
+                        });
+                });
+
+            modelBuilder.Entity("TimeTracking.Entities.Setting", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -73,11 +126,11 @@ namespace TimeTracking.Migrations
                         {
                             Id = 1,
                             Name = "Setting.GeneralSetting.LegalCopyright",
-                            Value = "LegalCopyright © 2021 Dell Inc. or its subsidiaries. All Rights Reserved."
+                            Value = "Copyright © {0} Dell Inc. or its subsidiaries. All Rights Reserved."
                         });
                 });
 
-            modelBuilder.Entity("TimeTracking.WorkDays", b =>
+            modelBuilder.Entity("TimeTracking.Entities.WorkDays", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

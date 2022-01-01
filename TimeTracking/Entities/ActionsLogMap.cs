@@ -1,17 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace TimeTracking
+namespace TimeTracking.Entities
 {
-    public class ActionsLog
-    {
-        public int Id { get; set; }
-        public int? ActionId { get; set; }
-        public string ActionName { get; set; }
-        public DateTime ActionDate { get; set; }
-    }
-
     public class ActionsLogMap : IEntityTypeConfiguration<ActionsLog>
     {
         public void Configure(EntityTypeBuilder<ActionsLog> builder)
