@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 
-namespace TimeTracking.Helper
+namespace TimeTracking.Console.Helper
 {
     internal sealed class OpenStreams : IDisposable
     {

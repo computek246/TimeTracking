@@ -1,4 +1,4 @@
-﻿namespace TimeTracking.Helper
+﻿namespace TimeTracking.Console.Helper
 {
     public enum LogLevel
     {

@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace TimeTracking.Helper
+namespace TimeTracking.Console.Helper
 {
     /// <summary>
     ///     Logs in a log file the given information.
