@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Reflection;
 using TimeTracking.Web.Models;
 
 namespace TimeTracking.Web.Controllers
@@ -25,7 +23,15 @@ namespace TimeTracking.Web.Controllers
 
         public IActionResult Privacy()
         {
-            return View();
+            var apiHelpViewModel =
+                Assembly.GetExecutingAssembly().GetAssemblyMethodInfo<BaseController>()
+                    .Where(x => x.Name == nameof(Index))
+                    .Select(x => x.ToMethodInfo())
+                    .OrderBy(x => x.Area)
+                    .ThenBy(x => x.Controller)
+                    .ThenBy(x => x.Action)
+                    .ToList();
+            return View(apiHelpViewModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -1,11 +1,15 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.Extensions.Options
+@using TimeTracking.Common
 @using TimeTracking.Web.Security.Entities
 @using TimeTracking.Common.Interfaces
 @using TimeTracking.Common.ExtensionMethod
 @using TimeTracking.Web
 @using TimeTracking.Web.Models
+@using TimeTracking.Domain.Entities
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-@inject ICurrentUserService<int> CurrentUserService
-@inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
+@inject SignInManager<User> SignInManager
+@inject ICurrentUserService<int> CurrentUserService
+@inject IOptions<AppSettings> AppSettings

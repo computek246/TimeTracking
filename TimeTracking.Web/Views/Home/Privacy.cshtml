@@ -1,6 +1,48 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
-}
-<h1>@ViewData["Title"]</h1>
+﻿@model IEnumerable<EndpointViewModel>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<p>Use this page to manage your site data.</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.DisplayableName)</th>
+            <th>@Html.DisplayNameFor(model => model.Controller)</th>
+            <th>@Html.DisplayNameFor(model => model.Action)</th>
+            <th>@Html.DisplayNameFor(model => model.Area)</th>
+            <th>@Html.DisplayNameFor(model => model.Attributes)</th>
+            <th>@Html.DisplayNameFor(model => model.ReturnType)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var attributes = string.Join(", ", item.Attributes);
+            var htmlAttributes = new
+            {
+                target = "_blank",
+                data_toggle = "tooltip",
+                data_placement = "top",
+                data_html = "true",
+                title = item.Description
+            };
+
+            <tr>
+                <td>@Html.ActionLink(item.DisplayableName, item.Action, item.Controller, new { area = item.Area }, htmlAttributes)</td>
+                <td>@Html.DisplayFor(modelItem => item.Controller)</td>
+                <td>@Html.DisplayFor(modelItem => item.Action)</td>
+                <td>@Html.DisplayFor(modelItem => item.Area)</td>
+                <td>@Html.DisplayFor(modelItem => attributes)</td>
+                <td>@Html.DisplayFor(modelItem => item.ReturnType)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts
+{
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        })
+    </script>
+}

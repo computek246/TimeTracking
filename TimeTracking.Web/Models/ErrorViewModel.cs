@@ -1,5 +1,3 @@
-using System;
-
 namespace TimeTracking.Web.Models
 {
     public class ErrorViewModel
