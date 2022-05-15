@@ -1,18 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>aspnet-TimeTracking.Web-1CFCF7BF-B976-45FA-A234-5E170F0152C1</UserSecretsId>
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="Logs\**" />
     <Content Remove="Logs\**" />
     <EmbeddedResource Remove="Logs\**" />
     <None Remove="Logs\**" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.12" />
@@ -23,20 +21,16 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.13" />
-
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
     <PackageReference Include="Serilog.Filters.Expressions" Version="2.1.0" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.3.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\TimeTracking.Domain\TimeTracking.Domain.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="Areas\Identity\Pages\Account\Manage\ChangePassword.cshtml" />
     <None Include="Areas\Identity\Pages\Account\Manage\Index.cshtml" />
@@ -44,5 +38,7 @@
     <None Include="Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml" />
     <None Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
   </ItemGroup>
-
+  <ItemGroup>
+    <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="2021.3.914" />
+  </ItemGroup>
 </Project>

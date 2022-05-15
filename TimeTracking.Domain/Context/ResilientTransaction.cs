@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,7 +24,7 @@ namespace TimeTracking.Domain.Context
             var strategy = _context.Database.CreateExecutionStrategy();
             await strategy.ExecuteAsync(async () =>
             {
-                await using var transaction = await _context.Database.BeginTransactionAsync();
+                await using var transaction = await _context.Database.BeginTransactionAsync(IsolationLevel.ReadCommitted);
                 try
                 {
                     await action();

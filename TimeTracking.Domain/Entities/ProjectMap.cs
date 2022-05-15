@@ -15,6 +15,8 @@ namespace TimeTracking.Domain.Entities
             builder.Property(x => x.ProjectName).IsRequired().HasMaxLength(400);
             builder.HasIndex(x => x.ProjectName).HasDatabaseName("IX_Setting_Name");
 
+            builder.HasMany(e => e.ActionsLogs).WithOne(e => e.Project).HasForeignKey(e => e.ProjectId);
+
             builder.HasData(new List<Project>
             {
                 new() {Id = 1, ProjectName = "Infinity", IsActive = true},

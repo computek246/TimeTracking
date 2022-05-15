@@ -19,7 +19,9 @@ namespace TimeTracking.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ActionsLogs.OrderBy(x => x.ActionDate).ToListAsync());
+            return View(await _context.ActionsLogs
+                .Include(e => e.Project)
+                .OrderBy(x => x.ActionDate).ToListAsync());
         }
 
 

@@ -38,6 +38,7 @@ namespace TimeTracking.Web.Helper.DI
             services.AddTransient(typeof(ICurrentUserService<>), typeof(CurrentUserService<>));
             services.AddHttpContextAccessor();
 
+            services.AddKendo();
             services.AddHealthChecks();
         }
 

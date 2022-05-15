@@ -8,7 +8,7 @@
             <th>@Html.DisplayNameFor(model => model.ActionId)</th>
             <th>@Html.DisplayNameFor(model => model.ActionName)</th>
             <th>@Html.DisplayNameFor(model => model.ActionDate)</th>
-            <th>@Html.DisplayNameFor(model => model.ProjectId)</th>
+            <th>@Html.DisplayNameFor(model => model.Project)</th>
             <th></th>
         </tr>
     </thead>
@@ -19,7 +19,7 @@
                 <td>@Html.DisplayFor(modelItem => item.ActionId)</td>
                 <td>@Html.DisplayFor(modelItem => item.ActionName)</td>
                 <td>@Html.DisplayFor(modelItem => item.ActionDate)</td>
-                <td>@Html.DisplayFor(modelItem => item.ProjectId)</td>
+                <td>@Html.DisplayFor(modelItem => item.Project.ProjectName)</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

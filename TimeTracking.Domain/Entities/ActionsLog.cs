@@ -9,5 +9,7 @@ namespace TimeTracking.Domain.Entities
         public string ActionName { get; set; }
         public DateTime ActionDate { get; set; }
         public int? ProjectId { get; set; }
+
+        public Project Project { get; set; }
     }
 }
